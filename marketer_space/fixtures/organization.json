@@ -1,0 +1,10 @@
+[
+  {
+    "model": "account.Organization",
+    "pk": 3,
+    "fields": {
+      "domain": "Hacktech.com",
+      "name": "Hacktech LLC"
+    }
+  }
+]

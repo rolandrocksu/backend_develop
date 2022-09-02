@@ -1,0 +1,13 @@
+[
+  {
+    "model": "account.AdminUser",
+    "pk": 3,
+    "fields": {
+      "first_name": "Hakob",
+      "last_name": "Hakobyan",
+      "email": "email",
+      "role": "super_admin",
+      "organization": 1
+    }
+  }
+]

@@ -1,10 +1,10 @@
 [
   {
-    "model": "account.Organization",
-    "pk": 3,
+    "model": "accounts.Organization",
+    "pk": 1,
     "fields": {
-      "domain": "Hacktech.com",
-      "name": "Hacktech LLC"
+      "domain": "marketerspace.com",
+      "name": "Marketer Space LLC"
     }
   }
 ]

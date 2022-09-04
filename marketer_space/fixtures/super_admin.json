@@ -1,13 +1,16 @@
 [
   {
-    "model": "account.AdminUser",
-    "pk": 3,
+    "model": "accounts.Account",
+    "pk": 1,
     "fields": {
       "first_name": "Hakob",
       "last_name": "Hakobyan",
-      "email": "email",
-      "role": "super_admin",
+      "email": "hakob@gmail.com",
+      "password": "pbkdf2_sha256$390000$BTBGWbrawPabSeQRuo5VtB$Wbltrzb+jOwLFmcNBAqrWHcqaRZy03rQ/OLhRLm6Cjo=",
+      "is_superuser": true,
+      "is_staff": true,
       "organization": 1
     }
   }
 ]
+

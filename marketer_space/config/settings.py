@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'accounts',
     'config'
 ]
@@ -99,13 +99,6 @@ DATABASES = {
     }
 }
 
-# DJOSER = {
-#     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-#     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-#     'ACTIVATION_URL': '#/activate/{uid}/{token}',
-#     'SEND_ACTIVATION_EMAIL': False,
-#     'SERIALIZERS': {},
-# }
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -185,6 +178,13 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.Account'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "rolandrocking@gmail.com" #sender's email-id
+EMAIL_HOST_PASSWORD = "lqxuchubclconyzg" #password associated with above email-id
 
 # AUTHENTICATION_BACKENDS = (
 #         'django.contrib.auth.backends.RemoteUserBackend',

@@ -2,13 +2,15 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Account, Organization
+from .models import (
+    Account,
+    Organization,
+    Invitation
+)
 from django.contrib.auth.hashers import make_password
 
 
-
 class AccountSerializer(serializers.ModelSerializer):
-
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=Account.objects.all())]
@@ -46,10 +48,10 @@ class OrganizationSerializer(serializers.ModelSerializer):
                 {"message": "Domain exists"})
 
         return attrs
+
     class Meta:
         model = Organization
         fields = ('domain', 'name', 'users')
-
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -63,3 +65,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         return token
 
+
+class InvitationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invitation
+        fields = ('id', 'organization', 'token', 'invitor', 'receiver', 'status', 'created_at')

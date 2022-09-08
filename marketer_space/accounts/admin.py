@@ -1,6 +1,4 @@
 from django.contrib import admin
-
-from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Account
 from .models import Organization
@@ -17,6 +15,15 @@ class AccountAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return Account.objects.all()
+
+
+# class OrganizationAdminUserAdmin(admin.ModelAdmin):
+#     model = Account
+#     list_display = ('id', 'organization')
+#
+#     def get_queryset(self, request):
+#         return Account.objects.filter(is_org_admin=True)
+
 
 # @admin.register(OrganizationAdminUser)
 # class OrganizationAdminUserAdmin(admin.ModelAdmin):

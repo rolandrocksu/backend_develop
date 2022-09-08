@@ -1,6 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
+from django.utils import timezone
+
+
 class Organization(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
     domain = models.CharField(max_length=256)
@@ -15,7 +19,7 @@ class Account(AbstractUser):
     organization = models.ForeignKey(
         'Organization', on_delete=models.CASCADE, null=True
     )
-    profile_picture = models.ImageField(upload_to='profile/%Y/%m/%d')
+    profile_picture = models.ImageField(upload_to='profile/%Y/%m/%d', null=True)
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
     modification_date = models.DateTimeField(auto_now=True, null=True)
     is_superuser = models.BooleanField(default=False)
@@ -26,11 +30,23 @@ class Account(AbstractUser):
 
     objects = UserManager()
 
+    @property
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
 
     def __str__(self):
         return self.email
+
+
+class Invitation(models.Model):
+    invitor = models.EmailField(max_length=100)
+    receiver = models.EmailField(max_length=100)
+    organization = models.ForeignKey(
+        'Organization', on_delete=models.CASCADE, null=True
+    )
+    status = models.CharField(max_length=50)
+    token = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
 # class SuperAdminUser(Account):
 #     class Meta:
@@ -45,4 +61,3 @@ class Account(AbstractUser):
 #         verbose_name = 'Organization Admin'
 #         verbose_name_plural = 'Organization Admin'
 #
-

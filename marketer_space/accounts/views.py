@@ -30,7 +30,7 @@ from .permissions import (
 )
 
 
-class AccountViewSet(viewsets.ModelViewSet):
+class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     queryset = Account.objects.none()
     permission_classes_per_method = {

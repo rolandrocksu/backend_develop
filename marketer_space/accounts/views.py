@@ -1,14 +1,11 @@
-from django.shortcuts import render
 import datetime
 import pytz
 import smtplib
 import uuid
 from datetime import timedelta
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
-from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView
 from .models import Account, Organization
 from config.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
@@ -38,7 +35,7 @@ class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
         "retrieve": [IsUser | IsOrganizationAdmin | IsSuperAdmin],
         "create": [IsOrganizationAdmin | IsSuperAdmin],
         "update": [IsUser | IsOrganizationAdmin | IsSuperAdmin],
-        "partial_update": [IsOrganizationAdmin | IsSuperAdmin],
+        "partial_update": [IsUser | IsOrganizationAdmin | IsSuperAdmin],
         "destroy": [IsOrganizationAdmin | IsSuperAdmin],
     }
 

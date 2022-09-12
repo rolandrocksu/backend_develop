@@ -11,6 +11,7 @@ Note: When a ViewSet inherits of PermissionPolicyMixin, it is important that the
 at least before any classes like *ViewSet or *ModelMixin.
 """
 
+
 class PermissionPolicyMixin:
     def check_permissions(self, request):
         try:
@@ -21,12 +22,10 @@ class PermissionPolicyMixin:
             handler = None
 
         if (
-            handler
-            and self.permission_classes_per_method
-            and self.permission_classes_per_method.get(handler.__name__)
+                handler
+                and self.permission_classes_per_method
+                and self.permission_classes_per_method.get(handler.__name__)
         ):
             self.permission_classes = self.permission_classes_per_method.get(handler.__name__)
 
         super().check_permissions(request)
-
-

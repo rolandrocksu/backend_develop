@@ -10,4 +10,6 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
+WORKDIR /app/marketer_space
+
 #CMD ["python", "marketer_space/manage.py", "runserver"]

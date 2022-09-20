@@ -25,7 +25,7 @@ from .permissions import (
     IsOrganizationAdmin,
     IsUser
 )
-
+from .tasks import xsum
 
 class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
     serializer_class = AccountSerializer
@@ -40,6 +40,7 @@ class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
+        xsum.delay(list(range(1000)))
         user = self.request.user
         if not user.is_authenticated:
             return Account.objects.none()

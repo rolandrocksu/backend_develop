@@ -1,5 +1,5 @@
 # Create your tasks here
-from logging import log
+from config.celery import app
 from celery import shared_task
 
 
@@ -13,7 +13,9 @@ def mul(x, y):
     return x * y
 
 
-@shared_task
+@app.task
 def xsum(numbers):
-    log.info("################################## I'm here ######################################")
+    print("################################## I'm here ######################################")
     return sum(numbers)
+
+

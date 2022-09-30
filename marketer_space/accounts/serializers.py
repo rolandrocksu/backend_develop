@@ -7,10 +7,12 @@ from .models import (
     Organization,
     Invitation
 )
+from campaign.serializers import CampaignSerializer
 from django.contrib.auth.hashers import make_password
 
 
 class AccountSerializer(serializers.ModelSerializer):
+    campaigns = CampaignSerializer(many=True, read_only=True)
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=Account.objects.all())]
@@ -34,7 +36,7 @@ class AccountSerializer(serializers.ModelSerializer):
     #     return user
     class Meta:
         model = Account
-        fields = ('id', 'email', 'organization', 'first_name', 'last_name',
+        fields = ('id', 'email', 'organization', 'campaigns', 'first_name', 'last_name',
                   'country', 'profile_picture', 'password', 'created', 'modified')
 
 

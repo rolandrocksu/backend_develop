@@ -27,6 +27,7 @@ from .permissions import (
 )
 from .tasks import xsum
 
+
 class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     queryset = Account.objects.none()
@@ -40,7 +41,7 @@ class AccountViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        xsum.delay(list(range(1000)))
+        # xsum.delay(list(range(1000)))
         user = self.request.user
         if not user.is_authenticated:
             return Account.objects.none()
@@ -63,7 +64,6 @@ class OrganizationViewSet(PermissionPolicyMixin, viewsets.ModelViewSet):
         "partial_update": [IsOrganizationAdmin | IsSuperAdmin],
         "destroy": [IsOrganizationAdmin | IsSuperAdmin],
     }
-
     def get_queryset(self):
         user = self.request.user
         if not user.is_authenticated:
@@ -157,4 +157,4 @@ class InviteUserCreationView(viewsets.ModelViewSet):
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-        return Response({'message': 'The invitation link is expired'}, status=status.HTTP_400_BAD_REQUEST,)
+        return Response({'message': 'The invitation link is expired'}, status=status.HTTP_400_BAD_REQUEST, )

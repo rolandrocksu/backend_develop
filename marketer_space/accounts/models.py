@@ -17,7 +17,7 @@ class Account(AbstractUser):
     email = models.EmailField("Email", unique=True)
     country = models.CharField(max_length=128)
     organization = models.ForeignKey(
-        'Organization', on_delete=models.CASCADE, null=True
+        'Organization', on_delete=models.CASCADE, null=True, related_name='users'
     )
     profile_picture = models.ImageField(upload_to='profile/%Y/%m/%d', null=True)
     creation_date = models.DateTimeField(auto_now_add=True, null=True)

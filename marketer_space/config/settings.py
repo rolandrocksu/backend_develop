@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'accounts',
-    'config'
+    'config',
+    'campaign',
 ]
 
 MIDDLEWARE = [
@@ -185,7 +186,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # password associat
 # )
 
 # Celery Configuration Options
-CELERY_TIMEZONE = "Australia/Tasmania"
+CELERY_TIMEZONE = "Asia/Yerevan"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_USER = os.environ.get('CELERY_BROKER_USER', 'guest')
